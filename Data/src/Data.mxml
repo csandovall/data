@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:RemoteObject id="data" destination="Data" fault="status.text=event.fault.toString();">
+		<mx:method name="createData" result="status.text='Created.';"/>
+		<mx:method name="readValue" result="value.text=event.result.toString();status.text='Read.'"/>
+		<mx:method name="updateValue" result="status.text='Updated.';"/>
+	<mx:method name="deleteData" result="status.text='Deleted.';"/>
+	</mx:RemoteObject>
+	<mx:Panel width="100%" height="100%">
+		<mx:Form>
+			<mx:FormItem label="Key"><mx:TextInput id="key"/></mx:FormItem>
+			<mx:FormItem label="Value"><mx:TextInput id="value"/></mx:FormItem>
+		</mx:Form>
+		<mx:HBox>
+			<mx:Button label="Create" click="data.createData(key.text,value.text);status.text=null;"/>
+			<mx:Button label="Read" click="data.readValue(key.text);status.text=null;"/>
+			<mx:Button label="Update" click="data.updateValue(key.text,value.text);status.text=null;"/>
+			<mx:Button label="Delete" click="data.deleteData(key.text);status.text=null;"/>
+		</mx:HBox>
+		<mx:TextArea id="status" width="100%" height="100%"/>
+	</mx:Panel>
+</mx:Application>
